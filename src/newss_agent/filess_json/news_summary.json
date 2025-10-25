@@ -1,0 +1,102 @@
+{
+  "generated_at": "2025-10-22T15:39:09.012232+00:00",
+  "counts": {
+    "total": 163,
+    "bullish": 65,
+    "bearish": 25,
+    "neutral": 73,
+    "high_impact": 72
+  },
+  "top_items": [
+    {
+      "title": "Stocks slip after latest batch of earnings reports; chipmaker drop: Live updates - CNBC",
+      "source": "\"stocks\" - Google News",
+      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE94a2wzalh4WEM4cmE2dUNGa3RPcXg2ZFhVTzdEX0NCczVNUmVoSlZvM3hBWXlsNnRER1NfRzlNdnROTVFKTU1ZSjd1RUUtU290UlY4MUgzckxYNFlRYzNPbmdpaDhhNmRtWnFYUnEzal96WDFqVGRv0gF8QVVfeXFMTzhJQVUwWXZabmdLdXA4Z2dNQzN5RlBMTEJLSjI1UUEtb3VIVXdnc1h3eGE3Y3IzMkFORXczV1Jkc2JmQ09YdFVMTmFsLWw3U3RPdHpoZ2VvRzB3ZWxBbTJ4TVZnelF3WnU2NUFyUG40WmpDM1NlNDZSbWE3eg?oc=5",
+      "tickers": "TSLA",
+      "sentiment": "bearish",
+      "impact": "High",
+      "explainer": "This headline is bearish for TSLA. Impact: High. Why: sentiment magnitude and entity match suggest a potential move. Headline: \u201cStocks slip after latest batch of earnings reports; chipmaker drop: Live updates - CNBC\u201d."
+    },
+    {
+      "title": "Investors Transact 2.422 billion Shares Worth N76.6bn in Five Days | - Business Post Nigeria",
+      "source": "\"NGX stocks\" - Google News",
+      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPZ3MxaV93QTJhb2MtMzM2TWZrV2prV2E3c2NRZThFZUJkdXFtSjVTaE4xa21KMDZ1VFJId0dfYUZZTDFxZk5SdTVIbzhTc2VveHJ3VG9NX3JSZUdXX29MNE5pY0FpR3hxNkFvY3VPcUhlQnUzN2tleVZjUXByc1owSjJCOEhnOUJ6RzUwa1c1RTVoVjE4amdzYjlaMTA0Wi11?oc=5",
+      "tickers": "ACCESSCORP.LG, DANGCEM.LG, GTCO.LG, MTNN.LG, SEPLAT.LG, UBA.LG, ZENITHBANK.LG",
+      "sentiment": "bullish",
+      "impact": "High",
+      "explainer": "This headline is bullish for ACCESSCORP.LG. Impact: High. Why: sentiment magnitude and entity match suggest a potential move. Headline: \u201cInvestors Transact 2.422 billion Shares Worth N76.6bn in Five Days | - Business Post Nigeria\u201d."
+    },
+    {
+      "title": "What Are the 2 Top Artificial Intelligence (AI) Stocks to Buy Right Now? - Yahoo Finance",
+      "source": "\"stocks\" - Google News",
+      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOWTl3QWdKT1M5LWxJUV9tRDRGQTl6SGR3VXZnTzJoaDBLdlo4c3czbllrUjdQdjZ6MWdSa2pUQl9XLW5SWlZEaE9uUGUxaTBVMWtTMlpLZHZsTVBfejFFYi1ycGwtaDhrLVNzeHNpOHZVWVNZY2t0cFdacG1RdG9QR0RraEU?oc=5",
+      "tickers": "BAC, BLK, GS, INTC, JPM, SCHW",
+      "sentiment": "bullish",
+      "impact": "High",
+      "explainer": "This headline is bullish for BAC. Impact: High. Why: sentiment magnitude and entity match suggest a potential move. Headline: \u201cWhat Are the 2 Top Artificial Intelligence (AI) Stocks to Buy Right Now? - Yahoo Finance\u201d."
+    },
+    {
+      "title": "2 No-Brainer Artificial Intelligence (AI) Stocks to Buy for 2026 With $5,000 Right Now - Yahoo Finance",
+      "source": "\"stocks\" - Google News",
+      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPNXNHdXNmT1lLYlBBQjg0VEhMT0pEeHJWRW1XaWhhUkx2WUZZRWtpWVVoYXBjSTdnR2ZYV0loUnpSWHMtVkxMSTJINENoWlhZQ3JLU3B4cjEyTmRvdExUc0MxNkJQdnVJQVUwR1RwT1hNY3ZFTUlfU3RxNWV1SnQtemc3X3VNcFJKY0E?oc=5",
+      "tickers": "BAC, BLK, GS, INTC, JPM, SCHW",
+      "sentiment": "bullish",
+      "impact": "High",
+      "explainer": "This headline is bullish for BAC. Impact: High. Why: sentiment magnitude and entity match suggest a potential move. Headline: \u201c2 No-Brainer Artificial Intelligence (AI) Stocks to Buy for 2026 With $5,000 Right Now - Yahoo Finance\u201d."
+    },
+    {
+      "title": "Nigeria\u2019s stock market hits \u20a6611bn gain as investor confidence returns - top gainers revealed - Business Insider Africa",
+      "source": "\"NGX stocks\" - Google News",
+      "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPX1pUUm8zUHljWmljbjdWVExiM2ZoUDhCX0p5M0FrRlhQNzI5dXljNGxwUTV4ZEtGSEV3ZFJiR05VZk54M2FsUWhSY2ZIX3FLUmdWQVI4QUxkMTBWYzM3RkdIcTVCM0dXZ19aV1pZUG1tT0xPRHNXYWdDVTdlMy02cHg0LUlHNFVCZmN2UHZLZGVGZUw0U0F4QXN2Vm4xLXNzYjdCdnlScHZiNzFqV2dITXM4RmVITVdjdjRXbm13U01mZ3g4UjBpUkdnZkZPTG91VUJJRmNHTF92UQ?oc=5",
+      "tickers": "",
+      "sentiment": "bullish",
+      "impact": "High",
+      "explainer": "This headline is bullish for market. Impact: High. Why: sentiment magnitude and entity match suggest a potential move. Headline: \u201cNigeria\u2019s stock market hits \u20a6611bn gain as investor confidence returns - top gainers revealed - Business Insider Africa\u201d."
+    },
+    {
+      "title": "Prediction: This Artificial Intelligence (AI) Stock Could Be the Next Trillion-Dollar Giant - Yahoo Finance",
+      "source": "\"stocks\" - Google News",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQdjJIMEF6MjFoWV9qZzFqQUVLNmpQTWd5bEhZMFZKUkhvNTY5VGdBbU5FUTZ2N0p0RE9WTmY4VElyN0YwYjR5RlhwejRVTFNFYmR0OGN5NXhDZjkyTXBqM0VWMC1XRXhRbzktbVNqbV9KcWNOVzRXdUNiWlJ3ai1OVmZxWlM2OGd1dUlabXdIZTZNNUE?oc=5",
+      "tickers": "BAC, BLK, GS, INTC, JPM, SCHW",
+      "sentiment": "bullish",
+      "impact": "High",
+      "explainer": "This headline is bullish for BAC. Impact: High. Why: sentiment magnitude and entity match suggest a potential move. Headline: \u201cPrediction: This Artificial Intelligence (AI) Stock Could Be the Next Trillion-Dollar Giant - Yahoo Finance\u201d."
+    },
+    {
+      "title": "Nvidia, Palantir, Super Micro Computer: High-flying stocks could stall soon - qz.com",
+      "source": "\"stocks\" - Google News",
+      "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE0yX2dTd29PNTFnNzhZZTU0WHZjTlVDcnN1SzQxWWV4YmloblE5Z2ZjRWNQRmxTWUFyUUM4cklfWXg1QjRPUDIzSUIzMlAtbmRfSG0xYURXZ2xBeHQxckpTU2lITW1QNVVQMDd3Q2dNT1p3Nnpz?oc=5",
+      "tickers": "NVDA",
+      "sentiment": "bullish",
+      "impact": "High",
+      "explainer": "This headline is bullish for NVDA. Impact: High. Why: sentiment magnitude and entity match suggest a potential move. Headline: \u201cNvidia, Palantir, Super Micro Computer: High-flying stocks could stall soon - qz.com\u201d."
+    },
+    {
+      "title": "\u2018The Einstein of Wall Street\u2019 says the best way to get rich is to \u2018invest in stocks, not stuff\u2019 - Fortune",
+      "source": "\"stocks\" - Google News",
+      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNVV9ZNVdoRy0zc2dyZGlWZWdKRnpLZ2R1eEdrRmsxYV9ZYWVNVTczaldEM256V2ZNMjc1d014dmhUYXhHcTNybTBuQWktZmJaRGoyaW9OQVhja0k2Z1NDZHp5V09oTUJiSkdMaFRoUDVBRm9hQkw4NzEyV09oWmtLQmdrdHdmMXkyZ01GcjdrQUNsNGZDVGdEeHdZZXEyb3FEcXpULWF5ZVJzWURPdEVlV3M0OVhJeW8?oc=5",
+      "tickers": "",
+      "sentiment": "bullish",
+      "impact": "High",
+      "explainer": "This headline is bullish for market. Impact: High. Why: sentiment magnitude and entity match suggest a potential move. Headline: \u201c\u2018The Einstein of Wall Street\u2019 says the best way to get rich is to \u2018invest in stocks, not stuff\u2019 - Fortune\u201d."
+    },
+    {
+      "title": "Beyond Meat shares sizzle on Walmart deal and meme stock interest - WTOP",
+      "source": "\"stocks\" - Google News",
+      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNUzNhODNtclVZM3l1Q25qRmxOaG5HMEdNZUZzME9SMkl2S2sxYnVnaWxsWWtpQ0ZjWWZYNV84RlV6Nm1RYTRoX1YtX3JWSVh2WWdHbENQUmJHQURXVW0xc3o3eVpLYkEzMFRweGRYZFdWeEZWQnpvSGxYejU1OXBZMFNJLUoyQ2taakhRQlo2TW1LcHdfallGS1drV2VzYlZmdEpqbUhTWnVQU2Ry?oc=5",
+      "tickers": "WMT",
+      "sentiment": "bullish",
+      "impact": "High",
+      "explainer": "This headline is bullish for WMT. Impact: High. Why: sentiment magnitude and entity match suggest a potential move. Headline: \u201cBeyond Meat shares sizzle on Walmart deal and meme stock interest - WTOP\u201d."
+    },
+    {
+      "title": "3 \"Magnificent Seven\" Stock(s) to Buy Hand Over Fist Right Now -- Including Nvidia (NVDA) Stock - The Motley Fool",
+      "source": "\"stocks\" - Google News",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQWExWQTYyOU5PWXY3MEpQWS1KYW1qaUVCNGl1R3pXeV9EVzFqRGQ3Umg2eUZJdmJiM3liUkNuQUYtS1M3YmdwQUJGRWh6ZWJYTXJGRk1fblVJR1RDVWNYZFV5OWdZTlFKOC1ZZjFwQ0ZXQ21pMGRGR19qMjFmTm1UWmxOU09rZllITkV1QlhRYXJxUzA?oc=5",
+      "tickers": "",
+      "sentiment": "bullish",
+      "impact": "High",
+      "explainer": "This headline is bullish for market. Impact: High. Why: sentiment magnitude and entity match suggest a potential move. Headline: \u201c3 \"Magnificent Seven\" Stock(s) to Buy Hand Over Fist Right Now -- Including Nvidia (NVDA) Stock - The Motley Fool\u201d."
+    }
+  ]
+}

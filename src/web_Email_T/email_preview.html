@@ -1,0 +1,304 @@
+
+        <html>
+        <head>
+            <style>
+                body {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    background-color: #f5f5f5;
+                    margin: 0;
+                    padding: 20px;
+                }
+                .container {
+                    max-width: 900px;
+                    margin: 0 auto;
+                    background-color: white;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                    overflow: hidden;
+                }
+                .header {
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 30px;
+                    text-align: center;
+                }
+                .header h1 {
+                    margin: 0;
+                    font-size: 32px;
+                }
+                .header p {
+                    margin: 10px 0 0 0;
+                    font-size: 16px;
+                    opacity: 0.9;
+                }
+                .summary {
+                    padding: 25px;
+                    background-color: #f8f9fa;
+                    border-bottom: 3px solid #e9ecef;
+                }
+                .summary-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 15px;
+                    margin-top: 15px;
+                }
+                .summary-item {
+                    background: white;
+                    padding: 15px;
+                    border-radius: 8px;
+                    border-left: 4px solid #667eea;
+                }
+                .summary-item h3 {
+                    margin: 0 0 5px 0;
+                    color: #666;
+                    font-size: 13px;
+                    text-transform: uppercase;
+                }
+                .summary-item p {
+                    margin: 0;
+                    font-size: 24px;
+                    font-weight: bold;
+                    color: #333;
+                }
+                .content {
+                    padding: 25px;
+                }
+                h2 {
+                    color: #333;
+                    border-bottom: 2px solid #667eea;
+                    padding-bottom: 10px;
+                    margin-top: 30px;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 20px 0;
+                    font-size: 14px;
+                }
+                th {
+                    background-color: #667eea;
+                    color: white;
+                    padding: 12px;
+                    text-align: left;
+                    font-weight: 600;
+                }
+                td {
+                    padding: 12px;
+                    border-bottom: 1px solid #e9ecef;
+                }
+                tr:hover {
+                    background-color: #f8f9fa;
+                }
+                .badge {
+                    padding: 4px 8px;
+                    border-radius: 4px;
+                    font-size: 11px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+                .badge-buy {
+                    background-color: #28a745;
+                    color: white;
+                }
+                .badge-sell {
+                    background-color: #dc3545;
+                    color: white;
+                }
+                .badge-high {
+                    background-color: #28a745;
+                    color: white;
+                }
+                .badge-medium {
+                    background-color: #ffc107;
+                    color: #333;
+                }
+                .badge-low {
+                    background-color: #6c757d;
+                    color: white;
+                }
+                .footer {
+                    background-color: #333;
+                    color: white;
+                    padding: 20px;
+                    text-align: center;
+                    font-size: 12px;
+                }
+                .disclaimer {
+                    background-color: #fff3cd;
+                    border: 2px solid #ffc107;
+                    border-radius: 8px;
+                    padding: 15px;
+                    margin: 20px 0;
+                }
+                .disclaimer h3 {
+                    color: #856404;
+                    margin: 0 0 10px 0;
+                }
+                .disclaimer p {
+                    color: #856404;
+                    margin: 5px 0;
+                    font-size: 13px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>📊 Daily Stock Recommendations</h1>
+                    <p>October 23, 2025</p>
+                </div>
+        
+                <div class="summary">
+                    <h2 style="margin-top: 0; border: none;">📈 Portfolio Summary</h2>
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <h3>Total Positions</h3>
+                            <p>7</p>
+                        </div>
+                        <div class="summary-item">
+                            <h3>Capital Allocated</h3>
+                            <p>$7,883</p>
+                        </div>
+                        <div class="summary-item">
+                            <h3>Cash Remaining</h3>
+                            <p>$2,117</p>
+                        </div>
+                        <div class="summary-item">
+                            <h3>Total Risk</h3>
+                            <p>3.52%</p>
+                        </div>
+                        <div class="summary-item">
+                            <h3>Avg Confidence</h3>
+                            <p>70.9%</p>
+                        </div>
+                        <div class="summary-item">
+                            <h3>Avg Accuracy</h3>
+                            <p>78.9%</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="content">
+                    <h2>🎯 Trade Recommendations</h2>
+        <table>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Action</th>
+                    <th>Shares</th>
+                    <th>Entry Price</th>
+                    <th>Target</th>
+                    <th>Stop Loss</th>
+                    <th>Position</th>
+                    <th>Confidence</th>
+                    <th>Accuracy</th>
+                </tr>
+            
+                <tr>
+                    <td><strong>BMY</strong></td>
+                    <td><span class="badge badge-buy">BUY</span></td>
+                    <td>28</td>
+                    <td>$44.54</td>
+                    <td>$45.43</td>
+                    <td>$42.72</td>
+                    <td>$1,247</td>
+                    <td><span class="badge badge-high">VERY HIGH</span></td>
+                    <td>70.7%</td>
+                </tr>
+                
+                <tr>
+                    <td><strong>PG</strong></td>
+                    <td><span class="badge badge-buy">BUY</span></td>
+                    <td>8</td>
+                    <td>$151.62</td>
+                    <td>$153.89</td>
+                    <td>$147.55</td>
+                    <td>$1,213</td>
+                    <td><span class="badge badge-high">HIGH</span></td>
+                    <td>86.9%</td>
+                </tr>
+                
+                <tr>
+                    <td><strong>CAT</strong></td>
+                    <td><span class="badge badge-buy">BUY</span></td>
+                    <td>2</td>
+                    <td>$524.65</td>
+                    <td>$532.52</td>
+                    <td>$494.18</td>
+                    <td>$1,049</td>
+                    <td><span class="badge badge-high">HIGH</span></td>
+                    <td>81.8%</td>
+                </tr>
+                
+                <tr>
+                    <td><strong>BA</strong></td>
+                    <td><span class="badge badge-buy">BUY</span></td>
+                    <td>5</td>
+                    <td>$217.26</td>
+                    <td>$220.52</td>
+                    <td>$207.46</td>
+                    <td>$1,086</td>
+                    <td><span class="badge badge-high">HIGH</span></td>
+                    <td>80.8%</td>
+                </tr>
+                
+                <tr>
+                    <td><strong>PFE</strong></td>
+                    <td><span class="badge badge-sell">SELL/SHORT</span></td>
+                    <td>45</td>
+                    <td>$24.85</td>
+                    <td>$24.48</td>
+                    <td>$25.92</td>
+                    <td>$1,118</td>
+                    <td><span class="badge badge-high">HIGH</span></td>
+                    <td>79.8%</td>
+                </tr>
+                
+                <tr>
+                    <td><strong>UNH</strong></td>
+                    <td><span class="badge badge-sell">SELL/SHORT</span></td>
+                    <td>3</td>
+                    <td>$365.37</td>
+                    <td>$359.89</td>
+                    <td>$384.17</td>
+                    <td>$1,096</td>
+                    <td><span class="badge badge-high">HIGH</span></td>
+                    <td>76.8%</td>
+                </tr>
+                
+                <tr>
+                    <td><strong>ADBE</strong></td>
+                    <td><span class="badge badge-buy">BUY</span></td>
+                    <td>3</td>
+                    <td>$357.55</td>
+                    <td>$362.91</td>
+                    <td>$339.67</td>
+                    <td>$1,073</td>
+                    <td><span class="badge badge-high">HIGH</span></td>
+                    <td>75.8%</td>
+                </tr>
+                </table>
+                <div style="background-color: #e7f3ff; border-left: 4px solid #2196F3; padding: 15px; margin: 20px 0; border-radius: 4px;">
+                    <h3 style="margin: 0 0 10px 0; color: #1976D2;">🌟 Top Recommendation: BMY</h3>
+                    <p style="margin: 5px 0;"><strong>Action:</strong> BUY 28 shares at $44.54</p>
+                    <p style="margin: 5px 0;"><strong>Confidence:</strong> VERY HIGH (85.4%)</p>
+                    <p style="margin: 5px 0;"><strong>Prophet Accuracy:</strong> 70.7%</p>
+                    <p style="margin: 5px 0;"><strong>Signal Agreement:</strong> 3/3 (bullish, bullish, bullish)</p>
+                </div>
+                
+                <div class="disclaimer">
+                    <h3>⚠ Important Disclaimer</h3>
+                    <p><strong>This is for educational purposes only.</strong></p>
+                    <p>This report is not financial advice. The recommendations are generated by an algorithmic system for learning purposes.</p>
+                    <p>Past performance does not guarantee future results. Trading stocks involves risk of loss.</p>
+                    <p>Always do your own research and consult with a licensed financial advisor before making investment decisions.</p>
+                </div>
+                </div>
+        
+                <div class="footer">
+                    <p>Generated by Stock Prediction System</p>
+                    <p>Powered by Prophet ML + Technical Analysis</p>
+                </div>
+            </div>
+        </body>
+        </html>
+        

@@ -1,0 +1,50 @@
+{
+  "AAPL": {
+    "symbol": "AAPL",
+    "model_type": "ARIMA",
+    "order": [
+      1,
+      1,
+      1
+    ],
+    "metrics": {
+      "mae": 5.258,
+      "rmse": 8.1252,
+      "mape": 2.45,
+      "directional_accuracy": 49.86,
+      "num_predictions": 370
+    }
+  },
+  "MSFT": {
+    "symbol": "MSFT",
+    "model_type": "ARIMA",
+    "order": [
+      1,
+      1,
+      1
+    ],
+    "metrics": {
+      "mae": 8.5285,
+      "rmse": 11.3176,
+      "mape": 2.0,
+      "directional_accuracy": 48.78,
+      "num_predictions": 370
+    }
+  },
+  "WMT": {
+    "symbol": "WMT",
+    "model_type": "ARIMA",
+    "order": [
+      1,
+      1,
+      1
+    ],
+    "metrics": {
+      "mae": 1.6276,
+      "rmse": 2.4928,
+      "mape": 1.86,
+      "directional_accuracy": 48.51,
+      "num_predictions": 370
+    }
+  }
+}

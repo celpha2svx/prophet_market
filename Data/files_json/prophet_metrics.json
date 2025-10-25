@@ -1,0 +1,494 @@
+{
+  "AAPL": {
+    "symbol": "AAPL",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 18.4353,
+      "rmse": 23.9125,
+      "mape": 8.28,
+      "directional_accuracy": 72.73,
+      "price_accuracy_5pct": 35.0,
+      "num_predictions": 100
+    }
+  },
+  "MSFT": {
+    "symbol": "MSFT",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 34.1637,
+      "rmse": 43.9478,
+      "mape": 7.05,
+      "directional_accuracy": 82.83,
+      "price_accuracy_5pct": 47.0,
+      "num_predictions": 100
+    }
+  },
+  "WMT": {
+    "symbol": "WMT",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 11.189,
+      "rmse": 12.367,
+      "mape": 11.97,
+      "directional_accuracy": 54.55,
+      "price_accuracy_5pct": 10.0,
+      "num_predictions": 100
+    }
+  },
+  "TSLA": {
+    "symbol": "TSLA",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 39.1975,
+      "rmse": 43.9384,
+      "mape": 12.84,
+      "directional_accuracy": 76.77,
+      "price_accuracy_5pct": 17.0,
+      "num_predictions": 100
+    }
+  },
+  "JPM": {
+    "symbol": "JPM",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 31.5966,
+      "rmse": 35.6448,
+      "mape": 11.79,
+      "directional_accuracy": 68.69,
+      "price_accuracy_5pct": 16.0,
+      "num_predictions": 100
+    }
+  },
+  "NVDA": {
+    "symbol": "NVDA",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 18.3419,
+      "rmse": 21.8077,
+      "mape": 11.97,
+      "directional_accuracy": 79.8,
+      "price_accuracy_5pct": 18.0,
+      "num_predictions": 100
+    }
+  },
+  "GOOGL": {
+    "symbol": "GOOGL",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 12.4091,
+      "rmse": 19.6529,
+      "mape": 6.0,
+      "directional_accuracy": 80.81,
+      "price_accuracy_5pct": 61.0,
+      "num_predictions": 100
+    }
+  },
+  "AMD": {
+    "symbol": "AMD",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 13.7793,
+      "rmse": 17.7413,
+      "mape": 10.91,
+      "directional_accuracy": 75.76,
+      "price_accuracy_5pct": 37.0,
+      "num_predictions": 100
+    }
+  },
+  "SNOW": {
+    "symbol": "SNOW",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 31.8435,
+      "rmse": 36.5064,
+      "mape": 17.48,
+      "directional_accuracy": 69.7,
+      "price_accuracy_5pct": 6.0,
+      "num_predictions": 100
+    }
+  },
+  "COIN": {
+    "symbol": "COIN",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 40.1421,
+      "rmse": 47.7745,
+      "mape": 14.75,
+      "directional_accuracy": 76.77,
+      "price_accuracy_5pct": 11.0,
+      "num_predictions": 100
+    }
+  },
+  "META": {
+    "symbol": "META",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 96.9237,
+      "rmse": 115.2801,
+      "mape": 14.14,
+      "directional_accuracy": 65.66,
+      "price_accuracy_5pct": 18.0,
+      "num_predictions": 100
+    }
+  },
+  "BAC": {
+    "symbol": "BAC",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 4.0754,
+      "rmse": 4.9183,
+      "mape": 8.91,
+      "directional_accuracy": 66.67,
+      "price_accuracy_5pct": 33.0,
+      "num_predictions": 100
+    }
+  },
+  "GS": {
+    "symbol": "GS",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 89.2,
+      "rmse": 105.0533,
+      "mape": 13.83,
+      "directional_accuracy": 63.64,
+      "price_accuracy_5pct": 15.0,
+      "num_predictions": 100
+    }
+  },
+  "MA": {
+    "symbol": "MA",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 47.9692,
+      "rmse": 56.1516,
+      "mape": 8.57,
+      "directional_accuracy": 63.64,
+      "price_accuracy_5pct": 31.0,
+      "num_predictions": 100
+    }
+  },
+  "UNH": {
+    "symbol": "UNH",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 65.0965,
+      "rmse": 78.7864,
+      "mape": 19.21,
+      "directional_accuracy": 76.77,
+      "price_accuracy_5pct": 19.0,
+      "num_predictions": 100
+    }
+  },
+  "ABBV": {
+    "symbol": "ABBV",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 16.4775,
+      "rmse": 19.9623,
+      "mape": 8.39,
+      "directional_accuracy": 71.72,
+      "price_accuracy_5pct": 25.0,
+      "num_predictions": 100
+    }
+  },
+  "CVX": {
+    "symbol": "CVX",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 7.235,
+      "rmse": 8.2186,
+      "mape": 4.98,
+      "directional_accuracy": 79.8,
+      "price_accuracy_5pct": 50.0,
+      "num_predictions": 100
+    }
+  },
+  "NKE": {
+    "symbol": "NKE",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 9.1462,
+      "rmse": 10.8623,
+      "mape": 13.82,
+      "directional_accuracy": 62.63,
+      "price_accuracy_5pct": 16.0,
+      "num_predictions": 100
+    }
+  },
+  "PFE": {
+    "symbol": "PFE",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 1.5285,
+      "rmse": 1.8637,
+      "mape": 6.32,
+      "directional_accuracy": 79.8,
+      "price_accuracy_5pct": 48.0,
+      "num_predictions": 100
+    }
+  },
+  "PG": {
+    "symbol": "PG",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 4.5667,
+      "rmse": 5.3461,
+      "mape": 2.82,
+      "directional_accuracy": 86.87,
+      "price_accuracy_5pct": 89.0,
+      "num_predictions": 100
+    }
+  },
+  "DIS": {
+    "symbol": "DIS",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 10.6105,
+      "rmse": 12.0764,
+      "mape": 10.22,
+      "directional_accuracy": 62.63,
+      "price_accuracy_5pct": 11.0,
+      "num_predictions": 100
+    }
+  },
+  "SCHW": {
+    "symbol": "SCHW",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 9.86,
+      "rmse": 11.4865,
+      "mape": 11.38,
+      "directional_accuracy": 64.65,
+      "price_accuracy_5pct": 18.0,
+      "num_predictions": 100
+    }
+  },
+  "QCOM": {
+    "symbol": "QCOM",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 10.1294,
+      "rmse": 12.4577,
+      "mape": 6.62,
+      "directional_accuracy": 72.73,
+      "price_accuracy_5pct": 40.0,
+      "num_predictions": 100
+    }
+  },
+  "ADBE": {
+    "symbol": "ADBE",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 63.8107,
+      "rmse": 75.5685,
+      "mape": 16.77,
+      "directional_accuracy": 75.76,
+      "price_accuracy_5pct": 18.0,
+      "num_predictions": 100
+    }
+  },
+  "CRM": {
+    "symbol": "CRM",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 12.8094,
+      "rmse": 14.9664,
+      "mape": 4.95,
+      "directional_accuracy": 66.67,
+      "price_accuracy_5pct": 55.0,
+      "num_predictions": 100
+    }
+  },
+  "BMY": {
+    "symbol": "BMY",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 2.5598,
+      "rmse": 4.3683,
+      "mape": 5.16,
+      "directional_accuracy": 70.71,
+      "price_accuracy_5pct": 62.0,
+      "num_predictions": 100
+    }
+  },
+  "C": {
+    "symbol": "C",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 10.0531,
+      "rmse": 12.0623,
+      "mape": 12.16,
+      "directional_accuracy": 68.69,
+      "price_accuracy_5pct": 22.0,
+      "num_predictions": 100
+    }
+  },
+  "SBUX": {
+    "symbol": "SBUX",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 4.0731,
+      "rmse": 5.6493,
+      "mape": 4.56,
+      "directional_accuracy": 60.61,
+      "price_accuracy_5pct": 66.0,
+      "num_predictions": 100
+    }
+  },
+  "UPS": {
+    "symbol": "UPS",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 16.0562,
+      "rmse": 18.0472,
+      "mape": 16.78,
+      "directional_accuracy": 73.74,
+      "price_accuracy_5pct": 11.0,
+      "num_predictions": 100
+    }
+  },
+  "BA": {
+    "symbol": "BA",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 20.5301,
+      "rmse": 23.3727,
+      "mape": 10.37,
+      "directional_accuracy": 80.81,
+      "price_accuracy_5pct": 20.0,
+      "num_predictions": 100
+    }
+  },
+  "MCD": {
+    "symbol": "MCD",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 17.4028,
+      "rmse": 20.4008,
+      "mape": 5.75,
+      "directional_accuracy": 73.74,
+      "price_accuracy_5pct": 45.0,
+      "num_predictions": 100
+    }
+  },
+  "BLK": {
+    "symbol": "BLK",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 124.3313,
+      "rmse": 143.4285,
+      "mape": 12.23,
+      "directional_accuracy": 65.66,
+      "price_accuracy_5pct": 12.0,
+      "num_predictions": 100
+    }
+  },
+  "MDT": {
+    "symbol": "MDT",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 4.5063,
+      "rmse": 5.0044,
+      "mape": 5.09,
+      "directional_accuracy": 71.72,
+      "price_accuracy_5pct": 50.0,
+      "num_predictions": 100
+    }
+  },
+  "TMO": {
+    "symbol": "TMO",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 55.1702,
+      "rmse": 65.2084,
+      "mape": 12.06,
+      "directional_accuracy": 74.75,
+      "price_accuracy_5pct": 25.0,
+      "num_predictions": 100
+    }
+  },
+  "AVGO": {
+    "symbol": "AVGO",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 31.3697,
+      "rmse": 39.0642,
+      "mape": 12.64,
+      "directional_accuracy": 74.75,
+      "price_accuracy_5pct": 22.0,
+      "num_predictions": 100
+    }
+  },
+  "INTC": {
+    "symbol": "INTC",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 3.7452,
+      "rmse": 4.4303,
+      "mape": 16.65,
+      "directional_accuracy": 62.63,
+      "price_accuracy_5pct": 15.0,
+      "num_predictions": 100
+    }
+  },
+  "AXP": {
+    "symbol": "AXP",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 30.0598,
+      "rmse": 33.777,
+      "mape": 10.22,
+      "directional_accuracy": 70.71,
+      "price_accuracy_5pct": 18.0,
+      "num_predictions": 100
+    }
+  },
+  "LLY": {
+    "symbol": "LLY",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 57.2284,
+      "rmse": 71.335,
+      "mape": 6.99,
+      "directional_accuracy": 71.72,
+      "price_accuracy_5pct": 43.0,
+      "num_predictions": 100
+    }
+  },
+  "COST": {
+    "symbol": "COST",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 84.7918,
+      "rmse": 96.5468,
+      "mape": 8.88,
+      "directional_accuracy": 54.55,
+      "price_accuracy_5pct": 23.0,
+      "num_predictions": 100
+    }
+  },
+  "CAT": {
+    "symbol": "CAT",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 33.3699,
+      "rmse": 42.3943,
+      "mape": 8.42,
+      "directional_accuracy": 81.82,
+      "price_accuracy_5pct": 38.0,
+      "num_predictions": 100
+    }
+  },
+  "DE": {
+    "symbol": "DE",
+    "model_type": "Prophet",
+    "metrics": {
+      "mae": 42.9982,
+      "rmse": 50.3339,
+      "mape": 8.94,
+      "directional_accuracy": 66.67,
+      "price_accuracy_5pct": 27.0,
+      "num_predictions": 100
+    }
+  }
+}

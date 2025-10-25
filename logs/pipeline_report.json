@@ -1,0 +1,63 @@
+{
+  "total_duration": 1491.26,
+  "total_steps": 9,
+  "successes": 9,
+  "failures": 0,
+  "steps": {
+    "Data Ingestion": {
+      "success": true,
+      "duration": 477.3903868198395,
+      "error": null,
+      "timestamp": "2025-10-22T13:18:55.356009"
+    },
+    "Feature Engineering": {
+      "success": true,
+      "duration": 9.100453853607178,
+      "error": null,
+      "timestamp": "2025-10-22T13:19:04.464406"
+    },
+    "Data Cleaning": {
+      "success": true,
+      "duration": 10.465088605880737,
+      "error": null,
+      "timestamp": "2025-10-22T13:19:14.930228"
+    },
+    "Risk Clustering": {
+      "success": true,
+      "duration": 23.306308031082153,
+      "error": null,
+      "timestamp": "2025-10-22T13:19:38.236978"
+    },
+    "Prophet Forecasting": {
+      "success": true,
+      "duration": 848.5006444454193,
+      "error": null,
+      "timestamp": "2025-10-22T13:33:46.741861"
+    },
+    "Signal Confluence": {
+      "success": true,
+      "duration": 33.10146927833557,
+      "error": null,
+      "timestamp": "2025-10-22T13:34:19.852549"
+    },
+    "News Sentiment Pipeline": {
+      "success": true,
+      "duration": 29.130472660064697,
+      "error": null,
+      "timestamp": "2025-10-22T13:34:48.987958"
+    },
+    "Recommendation Engine": {
+      "success": true,
+      "duration": 2.761457681655884,
+      "error": null,
+      "timestamp": "2025-10-22T13:34:51.758090"
+    },
+    "Email Report": {
+      "success": true,
+      "duration": 57.44044542312622,
+      "error": null,
+      "timestamp": "2025-10-22T13:35:49.202597"
+    }
+  },
+  "timestamp": "2025-10-22T13:35:49.223139"
+}
