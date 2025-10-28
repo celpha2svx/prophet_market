@@ -6,6 +6,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, precision_score
 from typing import Tuple
+import logging
+
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 class ModelTrainer:
@@ -21,8 +26,34 @@ class ModelTrainer:
         Y = data['Target_Y']
         return X, Y
 
+    def time_series_split(self, X: pd.DataFrame, Y: pd.Series) -> Tuple[
+        pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
+        """
+        Splits data into chronological training and testing sets based on self.test_size.
+        """
+        split_point = int(len(X) * (1 - self.test_size))
+
+        X_train = X.iloc[:split_point]
+        X_test = X.iloc[split_point:]
+        Y_train = Y.iloc[:split_point]
+        Y_test = Y.iloc[split_point:]
+
+        return X_train, X_test, Y_train, Y_test
+
     def scale_features(self, X_train: pd.DataFrame, X_test: pd.DataFrame):
         """Fits MinMaxScaler on training data and transforms both."""
+
+        X_train.replace([np.inf,-np.inf],np.nan,inplace=True)
+        X_test.replace([np.inf,-np.inf],np.nan,inplace=True)
+
+        nan_indices_train = X_train.index[X_train.isnull().any(axis=1)]
+        if not nan_indices_train.empty:
+            X_train.drop(nan_indices_train,inplace=True)
+
+        nan_indices_test= X_test.index[X_test.isnull().any(axis=1)]
+        if not nan_indices_test.empty:
+            X_test.drop(nan_indices_test, inplace=True)
+
         self.scaler = MinMaxScaler()
         X_train_scaled = self.scaler.fit_transform(X_train)
         X_test_scaled = self.scaler.transform(X_test)
@@ -35,19 +66,61 @@ class ModelTrainer:
 
     def balance_data(self, X: pd.DataFrame, Y: pd.Series):
         """Undersamples the majority class (0) to balance the training dataset."""
-        # Using RandomUnderSampler as agreed, to keep it safe for time series
-        sampler = RandomUnderSampler(random_state=self.random_state)
-        X_resampled, Y_resampled = sampler.fit_resample(X, Y)
 
-        # print(f"Original training shape: {X.shape}")
-        # print(f"Resampled training shape: {X_resampled.shape}")
+        # Combine X and Y into a single DataFrame
+        combined = X.copy()
+        combined['Target_Y'] = Y.values  # Use .values to avoid index issues
+
+        # Get class counts
+        class_counts = combined['Target_Y'].value_counts()
+        min_class_count = class_counts.min()
+
+        # Sample each class to have the same number of samples as the minority class
+        balanced_dfs = []
+        for class_label in combined['Target_Y'].unique():
+            class_df = combined[combined['Target_Y'] == class_label]
+            sampled_df = class_df.sample(n=min_class_count, random_state=self.random_state)
+            balanced_dfs.append(sampled_df)
+
+        # Concatenate all balanced classes
+        balanced_combined = pd.concat(balanced_dfs, ignore_index=True)
+
+        # Shuffle the data
+        balanced_combined = balanced_combined.sample(frac=1, random_state=self.random_state).reset_index(drop=True)
+
+        # Split back into X and Y
+        X_resampled = balanced_combined.drop(columns=['Target_Y'])
+        Y_resampled = balanced_combined['Target_Y']
 
         return X_resampled, Y_resampled
 
+    def create_sequences(self, X: pd.DataFrame, Y: pd.Series, timesteps: int) -> Tuple[
+        np.ndarray, np.ndarray, pd.Series]:
+        """
+        Converts the 2D feature DataFrame into 3D sequences (Samples, Timesteps, Features)
+        required for LSTM, and adjusts the target vector accordingly.
+        """
+        X_array = X.values
+        Y_array = Y.values
+
+        X_seq, Y_seq, Index_seq = [], [], []
+
+        for i in range(timesteps, len(X_array)):
+            X_seq.append(X_array[i - timesteps:i, :])
+            Y_seq.append(Y_array[i])
+            Index_seq.append(X.index[i])
+
+        X_final = np.array(X_seq)
+        Y_final = np.array(Y_seq)
+        Index_final = pd.Series(Index_seq)
+
+        return X_final, Y_final, Index_final
+
+
     def train_random_forest(self, X_train: pd.DataFrame, Y_train: pd.Series):
         """Trains a Random Forest Classifier."""
-        self.rf_model = RandomForestClassifier(n_estimators=100, random_state=self.random_state,
-                                               class_weight='balanced')  # Use class_weight for initial tuning
+        self.rf_model = RandomForestClassifier(n_estimators=300,max_depth=25,min_samples_leaf=3, random_state=self.random_state,
+                                               n_jobs=-1)  # Use class_weight for initial tuning
         self.rf_model.fit(X_train, Y_train)
         return self.rf_model
 
@@ -84,6 +157,14 @@ class ModelTrainer:
 
         # 1. Split X and Y
         X, Y = self._split_X_Y(final_df)
+
+        X.replace([np.inf,-np.inf],np.nan,inplace=True)
+
+        nan_indices = X.index[X.isnull().any(axis=1)]
+        if not nan_indices.empty:
+            X.drop(nan_indices,inplace=True)
+            Y.drop(nan_indices,inplace=True)
+            logger.warning(f"Dropped {len(nan_indices)} rows containing NaN")
 
         # 2. Split into Training and Testing Sets (80/20)
         X_train, X_test, Y_train, Y_test = train_test_split(

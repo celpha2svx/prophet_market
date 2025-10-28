@@ -1,6 +1,5 @@
 import pandas as pd
 import pandas_ta as ta
-import numpy as np
 
 
 class FeatureEngineer:
@@ -20,25 +19,21 @@ class FeatureEngineer:
 
     def add_features(self, data: pd.DataFrame) -> pd.DataFrame:
 
+        # --- PREPARATION ---
         data.set_index('date', inplace=True)
 
-        # Moving Averages
+        # --- 1. TREND AND MOMENTUM (Original Features) ---
         data['SMA_Short'] = data['close'].rolling(window=self.short_ma).mean()
         data['SMA_Long'] = data['close'].rolling(window=self.long_ma).mean()
         data['MA_Spread'] = data['SMA_Short'] - data['SMA_Long']
 
-        # RSI
         data.ta.rsi(close=data['close'], length=self.short_rsi, append=True)
         data.ta.rsi(close=data['close'], length=self.medium_rsi, append=True)
-
         data['RSI_Short'] = data[f'RSI_{self.short_rsi}']
         data['RSI_Medium'] = data[f'RSI_{self.medium_rsi}']
-
         data.drop(columns=[f'RSI_{self.short_rsi}', f'RSI_{self.medium_rsi}'], errors='ignore', inplace=True)
 
-        # ADX
         adx_df = ta.adx(high=data['high'], low=data['low'], close=data['close'], length=self.adx_period, append=False)
-
 
         adx_df.columns = [
             f'ADX_{self.adx_period}',
@@ -48,28 +43,50 @@ class FeatureEngineer:
         ]
         data = data.join(adx_df)
 
-        # Assign feature names
         data['ADX'] = data[f'ADX_{self.adx_period}']
         data['PlusDI'] = data[f'DMP_{self.adx_period}']
         data['MinusDI'] = data[f'DMN_{self.adx_period}']
         data['ADX_Spread'] = data['PlusDI'] - data['MinusDI']
-        data['ATR_Feature'] = data[f'ATR_{self.adx_period}']
 
-        # Time features (Now that 'date' is the index)
+        # --- 2. VOLATILITY, COMMITMENT, & EXHAUSTION (NEW Features) ---
+
+        # Volatility Base (Use the ADX-calculated ATR for a consistent period)
+        data['ATR_Base'] = data[f'ATR_{self.adx_period}']
+
+        # Volatility Ratio: Relative risk/reward gauge
+        data['Vol_Ratio'] = data['ATR_Base'] / data['close']
+
+        # Commitment: Size of the candle body
+        data['Body_Size'] = abs(data['close'] - data['open'])
+
+        # Exhaustion: CCI (Medium RSI period used as length)
+        # Note: pandas_ta CCI requires High, Low, Close (HLC)
+        cci_series = ta.cci(high=data['high'], low=data['low'], close=data['close'], length=self.medium_rsi, append=False)
+        cc_column_name = cci_series.name
+        data['CCI'] = cci_series
+
+        # Acceleration: Rate of Change (e.g., over 5 periods)
+        data['Close_ROC_5'] = data['close'].pct_change(5)
+
+        # Time features
         data['Hour'] = data.index.hour
         data['DayOfWeek'] = data.index.dayofweek
 
-        # Drop NaNs due to rolling calculations
+        # Drop NaNs due to rolling/technical indicator calculations
+
+        data.fillna(method='ffill',inplace=True)
         data.dropna(inplace=True)
 
-
+        # Select final features
         feature_columns = [
             'MA_Spread', 'RSI_Short', 'RSI_Medium',
-            'ADX', 'ADX_Spread', 'Hour', 'DayOfWeek',
+            'ADX', 'ADX_Spread',
+            'Vol_Ratio', 'Body_Size', 'CCI', 'Close_ROC_5',
+            'Hour', 'DayOfWeek',
             'Target_Y'
         ]
 
-        # Keep only the features you want for the model
+
         data = data[feature_columns]
 
         return data
