@@ -5,6 +5,7 @@ from src.models.lstm_trainer import LSTMPipeline
 from src.utils.paths import  DB_PATH
 import pandas as pd
 import logging
+import numpy as np
 
 
 logging.basicConfig(level=logging.INFO)
@@ -73,6 +74,9 @@ Y_train_clean = Y_train_aligned.reset_index(drop=True)
 X_test_clean = X_test_scaled.reset_index(drop=True)
 Y_test_clean = Y_test_aligned.reset_index
 
+print(f"X_train_scaled min: {X_train_scaled.min().min()}")
+print(f"X_train_scaled max: {X_train_scaled.max().max()}")
+print(f"X_train_scaled has inf: {np.isinf(X_train_scaled.values).any()}")
 
 print(f"X_train_clean shape: {X_train_clean.shape}")
 print(f"Y_train_clean shape: {Y_train_clean.shape}")
@@ -87,6 +91,17 @@ X_train_3D, Y_train_3D, _ = model_trainer.create_sequences(X_train_res, Y_train_
 X_test_3D, Y_test_3D, X_test_index = model_trainer.create_sequences(X_test_scaled, Y_test_1D, TIMESTEPS)
 
 logger.info(f"LSTM Train Shape: {X_train_3D.shape}, Test Shape: {X_test_3D.shape}")
+
+# Add this right before calling lstm_pipeline.run_lstm_pipeline()
+print("\n=== DATA DIAGNOSTICS ===")
+print(f"X_train shape: {X_train_3D.shape}")
+print(f"Y_train distribution:\n{pd.Series(Y_train_3D).value_counts()}")
+print(f"\nX_train stats:")
+print(f"  Min: {X_train_3D.min():.4f}")
+print(f"  Max: {X_train_3D.max():.4f}")
+print(f"  Mean: {X_train_3D.mean():.4f}")
+print(f"  Has NaN: {np.isnan(X_train_3D).any()}")
+print(f"  Has Inf: {np.isinf(X_train_3D).any()}")
 
 # --- 3. LSTM TRAINING AND EVALUATION ---
 logger.info("--- STEP 3: LSTM Training and Evaluation ---")

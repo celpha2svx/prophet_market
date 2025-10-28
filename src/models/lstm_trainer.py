@@ -22,31 +22,25 @@ class LSTMPipeline:
         features = X_train_3D.shape[2]
 
         # 2. Calculate class weights (CRITICAL for imbalanced data!)
-        class_weights_array = compute_class_weight(
-            class_weight='balanced',
-            classes=np.unique(Y_train_3D),
-            y=Y_train_3D
-        )
-        class_weights = {i: weight for i, weight in enumerate(class_weights_array)}
-        print(f"\nClass Weights: {class_weights}")
+        class_counts = pd.Series(Y_train_3D).value_counts()
+        total = len(Y_train_3D)
+
+        class_weights = {
+            0: total / (3 * class_counts[0]) * 0.5,  # Reduce weight for class 0
+            1: total / (3 * class_counts[1]) * 1.0,
+            2: total / (3 * class_counts[2]) * 1.0
+        }
+        print(f"\nManual Class Weights: {class_weights}")
 
         # 3. Build IMPROVED Model
         model = Sequential([
-            # First LSTM layer (return sequences for stacking)
-            Bidirectional(LSTM(128, return_sequences=True, activation='tanh',
-                               kernel_regularizer=l2(0.001)),
-                          input_shape=(self.timesteps, features)),
-            BatchNormalization(),
+            # Single LSTM layer
+            LSTM(64, return_sequences=False, activation='tanh',
+                 input_shape=(self.timesteps, features)),
             Dropout(0.3),
 
-            # Second LSTM layer
-            Bidirectional(LSTM(64, return_sequences=False, activation='tanh',
-                               kernel_regularizer=l2(0.001))),
-            BatchNormalization(),
-            Dropout(0.3),
-
-            # Dense layer for feature extraction
-            Dense(32, activation='relu', kernel_regularizer=l2(0.001)),
+            # Dense layer
+            Dense(32, activation='relu'),
             Dropout(0.2),
 
             # Output layer
