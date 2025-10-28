@@ -6,6 +6,7 @@ from src.utils.paths import  DB_PATH
 import pandas as pd
 import logging
 
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -71,6 +72,7 @@ X_train_clean = X_train_scaled.reset_index(drop=True)
 Y_train_clean = Y_train_aligned.reset_index(drop=True)
 X_test_clean = X_test_scaled.reset_index(drop=True)
 Y_test_clean = Y_test_aligned.reset_index
+
 
 print(f"X_train_clean shape: {X_train_clean.shape}")
 print(f"Y_train_clean shape: {Y_train_clean.shape}")

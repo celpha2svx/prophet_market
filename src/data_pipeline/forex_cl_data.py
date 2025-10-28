@@ -3,6 +3,7 @@ import pandas as pd
 import pandas_ta as ta
 import logging
 import numpy as np
+from src.utils.paths import  DB_PATH
 
 # Configure logging to show where messages come from
 logging.basicConfig(level=logging.INFO)
@@ -80,79 +81,107 @@ class DataProcessor:
 
     def create_target(self, symbols):
         """
-        Loads data, calculates risk levels (SL/TP), and defines the Target_Y column (0: Hold, 1: Buy, 2: Sell).
-
-        :param symbols: A list or single string of ticker symbols to process.
-        :return: A concatenated DataFrame of all processed symbols.
+        Improved target creation: checks which level (TP or SL) is hit FIRST.
         """
         if isinstance(symbols, str):
             symbols = [symbols]
 
         all_data = []
         for symbol in symbols:
-            # FIX: The key fix - always pass the symbol as a list to load_forex_data
             data = self.load_forex_data([symbol])
-
             if data.empty:
                 continue
 
-            # Use the instance's default window initially
             current_window = self.window
 
-            # --- Define Risk Levels (Stop Loss/Take Profit) ---
+            # --- Define Risk Levels ---
             if symbol == "GC=F":
-                current_window = 8  # Custom window for Gold
-                stoploss_pips = 0.35
-                takeprofit_pips = 1.00
-
-                # Buy Side Levels
-                data['Stop_Loss_Level'] = data['close'] - stoploss_pips
-                data['Take_Profit_Level'] = data['close'] + takeprofit_pips
-
-                # Sell Side Levels (Needed for Target_Y=2)
-                data['SELL_Target_Low'] = data['close'] - takeprofit_pips
-                data['SELL_Stop_Loss_High'] = data['close'] + stoploss_pips
+                current_window = 8
+                atr_sl = 0.35
+                atr_tp = 1.00
             else:
                 atr_period = 14
                 data['ATR'] = self.calculate_atr(data, period=atr_period)
+                atr_sl = self.stop_loss_multiplier * data['ATR']
+                atr_tp = self.take_profit_multiplier * data['ATR']
 
-                # Buy Side Levels (using ATR multiples)
-                data['Stop_Loss_Level'] = data['close'] - self.stop_loss_multiplier * data['ATR']
-                data['Take_Profit_Level'] = data['close'] + self.take_profit_multiplier * data['ATR']
+            # Buy Side Levels
+            data['BUY_TP'] = data['close'] + atr_tp
+            data['BUY_SL'] = data['close'] - atr_sl
 
-                # FIX: Define Sell Side Levels for all other symbols (using ATR multiples)
-                # Sell Target is reached when price drops by TP multiplier ATR
-                data['SELL_Target_Low'] = data['close'] - self.take_profit_multiplier * data['ATR']
-                # Sell Stop Loss is hit when price rises by SL multiplier ATR
-                data['SELL_Stop_Loss_High'] = data['close'] + self.stop_loss_multiplier * data['ATR']
+            # Sell Side Levels
+            data['SELL_TP'] = data['close'] - atr_tp
+            data['SELL_SL'] = data['close'] + atr_sl
 
-            # --- Calculate Future High/Low ---
-            # Use the local 'current_window' variable
-            data['Future_High_Max'] = data['high'].rolling(window=current_window).max().shift(-current_window)
-            data['Future_Low_Min'] = data['low'].rolling(window=current_window).min().shift(-current_window)
+            # --- NEW APPROACH: Find FIRST hit within window ---
+            target_list = []
 
-            # --- Define Target Conditions ---
+            for i in range(len(data) - current_window):
+                future_highs = data['high'].iloc[i + 1:i + 1 + current_window].values
+                future_lows = data['low'].iloc[i + 1:i + 1 + current_window].values
 
-            # Condition 1: Buy (Target_Y = 1) - TP hit before SL hit
-            up_condition = (data['Future_High_Max'] >= data['Take_Profit_Level']) & \
-                           (data['Future_Low_Min'] > data['Stop_Loss_Level'])
+                buy_tp = data['BUY_TP'].iloc[i]
+                buy_sl = data['BUY_SL'].iloc[i]
+                sell_tp = data['SELL_TP'].iloc[i]
+                sell_sl = data['SELL_SL'].iloc[i]
 
-            # Condition 2: Sell (Target_Y = 2) - TP hit before SL hit
-            down_condition = (data['Future_Low_Min'] <= data['SELL_Target_Low']) & \
-                             (data['Future_High_Max'] < data['SELL_Stop_Loss_High'])
+                # Check each future bar in sequence
+                buy_signal = False
+                sell_signal = False
 
-            conditions = [up_condition, down_condition]
-            choices = [1, 2]
-            data['Target_Y'] = np.select(conditions, choices, default=0)
+                for high, low in zip(future_highs, future_lows):
+                    # Check BUY outcome
+                    if high >= buy_tp:
+                        buy_signal = True
+                        break
+                    if low <= buy_sl:
+                        break  # SL hit first, no buy signal
 
-            data.dropna(subset=['Future_High_Max'], inplace=True)
+                # Reset and check SELL outcome
+                for high, low in zip(future_highs, future_lows):
+                    # Check SELL outcome
+                    if low <= sell_tp:
+                        sell_signal = True
+                        break
+                    if high >= sell_sl:
+                        break  # SL hit first, no sell signal
+
+                # Determine target
+                if buy_signal and not sell_signal:
+                    target_list.append(1)  # UP
+                elif sell_signal and not buy_signal:
+                    target_list.append(2)  # DOWN
+                elif buy_signal and sell_signal:
+                    # Both would profit - check which TP is closer
+                    buy_distance = abs(buy_tp - data['close'].iloc[i])
+                    sell_distance = abs(sell_tp - data['close'].iloc[i])
+                    target_list.append(1 if buy_distance < sell_distance else 2)
+                else:
+                    target_list.append(0)  # NEUTRAL
+
+            # Pad remaining rows with NaN
+            target_list.extend([np.nan] * current_window)
+            data['Target_Y'] = target_list
+
+            # Drop NaN targets
+            data.dropna(subset=['Target_Y'], inplace=True)
 
             all_data.append(data)
 
-        # Combine all processed symbol data
         if all_data:
-            logger.info(f"Successfully processed and concatenated data for {len(all_data)} symbols.")
-            return pd.concat(all_data, ignore_index=True)
+            logger.info(f"Successfully processed {len(all_data)} symbols.")
+            return pd.concat(all_data, ignore_index=False)
         else:
-            logger.warning("No data was successfully loaded or processed.")
             return pd.DataFrame()
+
+if __name__ == "__main__":
+    db_path = str(DB_PATH)
+    pipeline = DataProcessor(db_path=db_path)
+
+    print("\n" + "=" * 50)
+    print("Calculating features for multiple stocks...")
+    features = ["EURUSD=X", "GBPUSD=X", "USDJPY=X", "AUDUSD=X", "USDCAD=X", "USDCHF=X",
+                "NZDUSD=X", "EURGBP=X", "EURJPY=X", "GBPJPY=X", "GC=F"]
+
+    all_data = pipeline.create_target(features)
+    print(all_data['Target_Y'].value_counts(normalize=True))
