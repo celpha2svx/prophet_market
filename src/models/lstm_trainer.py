@@ -32,16 +32,16 @@ class LSTMPipeline:
         }
         print(f"\nManual Class Weights: {class_weights}")
 
-        # 3. Build IMPROVED Model
         model = Sequential([
-            # Single LSTM layer
+            # LSTM with stronger dropout
             LSTM(64, return_sequences=False, activation='tanh',
+                 dropout=0.4, recurrent_dropout=0.3,  # Add recurrent dropout
                  input_shape=(self.timesteps, features)),
-            Dropout(0.3),
+            Dropout(0.4),  # Increased from 0.3
 
-            # Dense layer
-            Dense(32, activation='relu'),
-            Dropout(0.2),
+            # Smaller dense layer
+            Dense(16, activation='relu'),  # Reduced from 32
+            Dropout(0.3),  # Increased from 0.2
 
             # Output layer
             Dense(3, activation='softmax')
@@ -118,7 +118,7 @@ class LSTMPipeline:
         print("HIGH CONFIDENCE PREDICTIONS (>60% confidence)")
         print("=" * 50)
 
-        high_conf_mask = confidence_scores > 0.6
+        high_conf_mask = confidence_scores > 0.5
         if high_conf_mask.sum() > 0:
             Y_test_high_conf = Y_test_3D[high_conf_mask]
             Y_pred_high_conf = Y_pred[high_conf_mask]

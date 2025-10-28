@@ -6,14 +6,18 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
 # --- Common Directory Paths ---
 DATA_DIR = PROJECT_ROOT / "Data"
+SRC_DIR = PROJECT_ROOT / "src"
 LOGS_DIR = PROJECT_ROOT / "logs"
 CSV_DIR = DATA_DIR / "files_csv"
 JSON_DIR = DATA_DIR / "files_json"
 IMG_DIR = DATA_DIR / "images_file"
+DATA_PIPE = SRC_DIR / "data_pipeline"
+MODELS = SRC_DIR / "models"
+MODELSS = MODELS / "models"
 
 # --- Common File Paths (for output/input) ---
 CONFIG_PATH = PROJECT_ROOT / "config.yaml"
-DB_PATH = PROJECT_ROOT / "src/data_pipeline/data_store.db" # Or DATA_DIR / "data_store.db"
+DB_PATH =  DATA_PIPE / "data_store.db" # Or DATA_DIR / "data_store.db"
 
 # Feature Engineering Output / Data Cleaning Input
 ALL_FEATURE_CSV = CSV_DIR / "all_feature.csv"
@@ -45,10 +49,24 @@ STOCK_PREDICTABILY = CSV_DIR / "stock_predictability_leaderboard.csv"
 # Recommending Portfolio
 RECOMMEND_PORTFOLIO = CSV_DIR / "recommended_portfolio.csv"
 
+#session Csv
+SESSION_DATA = CSV_DIR / "session_data.csv"
 
+#Feature session csv
+FEATURE_SESSION_DATA = CSV_DIR / "session_features.csv"
+
+
+MODEL_PATH = MODELSS / "session_rf_model.pkl"
+
+SCALER_PATH = MODELSS / "session_scaler.pkl"
+
+FEATURE_PATH = MODELSS / "feature_names.pkl"
 
 def check_and_create_dirs():
     """Ensure all necessary output directories exist."""
     print(os.makedirs(CSV_DIR, exist_ok=True))
     print(os.makedirs(JSON_DIR, exist_ok=True))
     print(os.makedirs(LOGS_DIR, exist_ok=True))
+    print(os.makedirs(DATA_PIPE, exist_ok=True))
+    print(os.makedirs(MODELS, exist_ok=True))
+    print(os.makedirs(MODELSS, exist_ok=True))

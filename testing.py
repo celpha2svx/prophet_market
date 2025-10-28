@@ -48,8 +48,32 @@ model_trainer = ModelTrainer(test_size=0.2, random_state=42)
 # Get X and Y
 X, Y = model_trainer._split_X_Y(X_combined)
 
-# Split (2D)
-X_train_2D, X_test_2D, Y_train_1D, Y_test_1D = model_trainer.time_series_split(X, Y)
+# IMPORTANT: Sort by date first to ensure chronological order
+X = X.sort_index()
+Y = Y.sort_index()
+
+# Calculate split point based on sorted data
+split_date_idx = int(len(X) * 0.8)
+split_date = X.index[split_date_idx]
+
+print(f"\n=== SPLIT INFO ===")
+print(f"Split date: {split_date}")
+print(f"Train samples: {split_date_idx}")
+print(f"Test samples: {len(X) - split_date_idx}")
+
+# Split chronologically
+X_train_2D = X.iloc[:split_date_idx]
+X_test_2D = X.iloc[split_date_idx:]
+Y_train_1D = Y.iloc[:split_date_idx]
+Y_test_1D = Y.iloc[split_date_idx:]
+
+print("\n=== TRAIN/TEST COMPARISON ===")
+print(f"Train period: {X_train_2D.index.min()} to {X_train_2D.index.max()}")
+print(f"Test period: {X_test_2D.index.min()} to {X_test_2D.index.max()}")
+print(f"\nTrain Y distribution:")
+print(Y_train_1D.value_counts(normalize=True))
+print(f"\nTest Y distribution:")
+print(Y_test_1D.value_counts(normalize=True))
 
 # Scale (2D)
 X_train_scaled, X_test_scaled = model_trainer.scale_features(X_train_2D, X_test_2D)
