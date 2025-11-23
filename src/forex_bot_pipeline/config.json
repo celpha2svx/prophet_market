@@ -1,0 +1,12 @@
+{
+    "risk_profile": "CONSERVATIVE",
+    "min_confidence": 0.70,
+    "pairs": [
+        "GC=F"
+    ],
+    "mt5_login": 211891557,
+    "mt5_password": "Abdulwahab@2006",
+    "mt5_server": "Exness-MT5Trial9",
+    "trading_enabled": true,
+    "notification_enabled": false
+}

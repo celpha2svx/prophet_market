@@ -4,6 +4,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
+
 # --- Common Directory Paths ---
 DATA_DIR = PROJECT_ROOT / "Data"
 SRC_DIR = PROJECT_ROOT / "src"
@@ -12,6 +13,7 @@ CSV_DIR = DATA_DIR / "files_csv"
 JSON_DIR = DATA_DIR / "files_json"
 IMG_DIR = DATA_DIR / "images_file"
 DATA_PIPE = SRC_DIR / "data_pipeline"
+FX_PIPE = SRC_DIR / "forex_bot_pipeline"
 MODELS = SRC_DIR / "models"
 MODELSS = MODELS / "models"
 
@@ -55,6 +57,8 @@ SESSION_DATA = CSV_DIR / "session_data.csv"
 #Feature session csv
 FEATURE_SESSION_DATA = CSV_DIR / "session_features.csv"
 
+
+CONFIG_JSON = FX_PIPE / "config.json"
 
 MODEL_PATH = MODELSS / "session_rf_model.pkl"
 

@@ -1,0 +1,80 @@
+app:
+  timezone: "Africa/Lagos"
+  eod_time_local: "21:58"   # when to pull EOD daily (local time)
+  data_source: "yahoo"      # "yahoo" or "alpha_vantage"
+
+tickers:
+  stocks:
+    - "AAPL"
+    - "MSFT"
+    - "TSLA"
+    - "JPM"
+    - "NVDA"
+    - "GOOGL"
+    - "AMD"
+    - "SNOW"
+    - "COIN"
+    - "META"
+    - "BAC"
+    - "GS"
+    - "MA"
+    - "UNH"
+    - "ABBV"
+    - "CVX"
+    - "WMT"
+    - "NKE"
+    - "PFE"
+    - "PG"
+    - "DIS"
+    - "SCHW"
+    - "QCOM"
+    - "ADBE"
+    - "CRM"
+    - "BMY"
+    - "C"
+    - "SBUX"
+    - "UPS"
+    - "BA"
+    - "MCD"
+    - "BLK"
+    - "MDT"
+    - "TMO"
+    - "AVGO"
+    - "INTC"
+    - "AXP"
+    - "LLY"
+    - "COST"
+    - "CAT"
+    - "DE"
+  forex:
+    - "EURUSD=X"
+    - "GBPUSD=X"
+    - "USDJPY=X"
+    - "AUDUSD=X"
+    - "USDCAD=X"
+    - "USDCHF=X"
+    - "NZDUSD=X"
+    - "EURGBP=X"
+    - "EURJPY=X"
+    - "GBPJPY=X"
+    - "GC=F"
+
+ingestion:
+  yahoo:
+    period: "2y"           # valid: 1d,5d,1mo,3mo,6mo,1y,2y,5y,10y,ytd,max
+  alpha_vantage:
+    timeframe: "daily"
+
+news:
+  sources:
+    - "https://finance.yahoo.com/rss/topstories"
+    - "https://news.google.com/rss/search?q=stocks&hl=en-US&gl=US&ceid=US:en"
+    - "https://news.google.com/rss/search?q=NGX+stocks&hl=en-US&gl=US&ceid=US:en"
+  dedup_hours: 72
+  min_confidence: 0.4
+  output_csv_raw: "filess_csv/news_raw.csv"
+  output_csv_enriched: "filess_csv/news_enriched.csv"
+  output_json_summary: "filess_json/news_summary.json"
+
+database:
+  path: "src/data_pipeline/data_store.db"
