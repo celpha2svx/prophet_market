@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stock Prediction Dashboard</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <style>
+    :root{
+      --bg-dark: #0a0a0a;
+      --bg-card: #121212;
+      --gold: #d4af37;
+      --gold-dark: #b8941f;
+      --gold-light: #f4d03f;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0a0;
+      --border: rgba(212, 175, 55, 0.1);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+      --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: var(--text-primary);
+    }
+
+    body {
+      padding: 20px;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header.app-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header.app-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .brand {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--bg-dark);
+      box-shadow: var(--shadow-gold);
+      position: relative;
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 12px;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.3;
+    }
+
+    .headline h1 {
+      font-size: 22px;
+      margin: 0;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .headline p {
+      margin: 4px 0 0 0;
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 10px 18px;
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      border-color: var(--gold);
+      box-shadow: var(--shadow-gold);
+      transform: translateY(-2px);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border: none;
+      color: var(--bg-dark);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .btn.primary:hover {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    /* Stats Grid */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      margin-top: 10px;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 6px;
+    }
+
+    /* Table Section */
+    .section {
+      margin-bottom: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .section h2 {
+      margin: 0;
+      color: var(--text-primary);
+      font-size: 20px;
+    }
+
+    .subscribe-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    input[type="email"] {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-width: 240px;
+      transition: all 0.3s ease;
+    }
+
+    input[type="email"]:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: transparent;
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: var(--bg-dark);
+      padding: 14px 12px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    tbody td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-primary);
+      font-size: 14px;
+    }
+
+    tbody tr {
+      transition: background 0.2s ease;
+    }
+
+    tbody tr:hover {
+      background: rgba(212, 175, 55, 0.05);
+    }
+
+    .badge {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-block;
+    }
+
+    .badge.buy {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+    }
+
+    .badge.sell {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+    }
+
+    .confidence-high {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    .confidence-med {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: var(--bg-dark);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    .confidence-low {
+      background: #374151;
+      color: #d1d5db;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    /* Charts */
+    .charts {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .chart-card {
+      padding: 20px;
+    }
+
+    .chart-container {
+      height: 360px;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--gold);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-gold);
+      display: none;
+      z-index: 1000;
+      animation: slideIn 0.3s ease;
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Utilities */
+    .muted {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    .small {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .mono {
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .empty-state {
+      padding: 60px 40px;
+      text-align: center;
+      color: var(--text-secondary);
+    }
+
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.3;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .charts {
+        grid-template-columns: 1fr;
+      }
+
+      .header-actions {
+        width: 100%;
+      }
+
+      .subscribe-row {
+        width: 100%;
+      }
+
+      input[type="email"] {
+        flex: 1;
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="root">
+    <!-- Header -->
+    <header class="app-header" role="banner">
+      <div class="brand">
+        <div class="logo">SP</div>
+        <div class="headline">
+          <h1>Stock Prediction System</h1>
+          <p class="small">AI-powered trading signals · Real-time insights</p>
+        </div>
+      </div>
+
+      <div class="header-actions" role="navigation">
+        <div class="small mono muted">Updated: <span id="updateTime">{{ update_time }}</span></div>
+        <button class="btn" onclick="location.href='/signin'">Sign In</button>
+        <button class="btn primary" id="refreshBtn">🔄 Refresh</button>
+      </div>
+    </header>
+
+    <!-- Stats Grid -->
+    <div class="stats" aria-live="polite">
+      <div class="card">
+        <div class="stat-label">Total Positions</div>
+        <div class="stat-value" id="totalPositions">0</div>
+        <div class="stat-sub">Active recommendations</div>
+      </div>
+
+      <div class="card">
+        <div class="stat-label">Capital Allocated</div>
+        <div class="stat-value" id="capitalAllocated">$0</div>
+        <div class="stat-sub" id="capPct">0% of portfolio</div>
+      </div>
+
+      <div class="card">
+        <div class="stat-label">Cash Reserve</div>
+        <div class="stat-value" id="cashReserve">$0</div>
+        <div class="stat-sub" id="cashPct">0% available</div>
+      </div>
+
+      <div class="card">
+        <div class="stat-label">Total Risk</div>
+        <div class="stat-value" id="totalRisk">0%</div>
+        <div class="stat-sub" id="riskVal">$0 at risk</div>
+      </div>
+
+      <div class="card">
+        <div class="stat-label">Avg Confidence</div>
+        <div class="stat-value" id="avgConfidence">0%</div>
+        <div class="stat-sub small">System confidence</div>
+      </div>
+
+      <div class="card">
+        <div class="stat-label">Avg Accuracy</div>
+        <div class="stat-value" id="avgAccuracy">0%</div>
+        <div class="stat-sub small">Prophet accuracy</div>
+      </div>
+    </div>
+
+    <!-- Recommendations Table -->
+    <div class="section">
+      <div class="card">
+        <div class="section-header">
+          <h2>🎯 Today's Recommendations</h2>
+          <div class="subscribe-row">
+            <div class="small muted">Get daily signals:</div>
+            <input id="subscribeEmail" type="email" placeholder="your@email.com" aria-label="Email address">
+            <button class="btn primary" id="subscribeBtn">Subscribe</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          {% if recommendations|length > 0 %}
+          <table>
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Action</th>
+                <th>Shares</th>
+                <th>Entry</th>
+                <th>Target</th>
+                <th>Stop</th>
+                <th>Position</th>
+                <th>Risk</th>
+                <th>Confidence</th>
+                <th>Accuracy</th>
+              </tr>
+            </thead>
+            <tbody id="recBody">
+              {% for rec in recommendations %}
+              <tr>
+                <td>
+                  <strong>{{ rec.symbol }}</strong>
+                  {% if rec.sector %}<div class="small muted">{{ rec.sector }}</div>{% endif %}
+                </td>
+                <td><span class="badge {{ 'buy' if rec.action == 'BUY' else 'sell' }}">{{ rec.action }}</span></td>
+                <td>{{ rec.shares }}</td>
+                <td class="mono">${{ "%.2f"|format(rec.current_price) }}</td>
+                <td>${{ "%.2f"|format(rec.target_price) }}</td>
+                <td>${{ "%.2f"|format(rec.stop_loss) }}</td>
+                <td>${{ "%.0f"|format(rec.position_value) }}</td>
+                <td>{{ "%.2f"|format(rec.risk_pct) }}%</td>
+                <td>
+                  {% set label = rec.confidence_label %}
+                  {% if 'High' in label %}
+                    <span class="confidence-high">{{ label }}</span>
+                  {% elif 'Medium' in label %}
+                    <span class="confidence-med">{{ label }}</span>
+                  {% else %}
+                    <span class="confidence-low">{{ label }}</span>
+                  {% endif %}
+                </td>
+                <td>{{ "%.1f"|format(rec.prophet_accuracy) }}%</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <div class="empty-state">
+            <div class="empty-state-icon">📊</div>
+            <div style="font-size:18px;margin-bottom:8px;color:var(--text-primary)">No recommendations today</div>
+            <div class="small">Run the recommendation engine to generate signals</div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts">
+      <div class="chart-card card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <h3 style="margin:0">📈 Prophet Model Accuracy</h3>
+          <div class="small muted">Directional accuracy by ticker</div>
+        </div>
+        <div id="accuracyChart" class="chart-container"></div>
+      </div>
+
+      <div class="chart-card card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <h3 style="margin:0">💰 Allocation</h3>
+          <div class="small muted">Position distribution</div>
+        </div>
+        <div id="allocationChart" class="chart-container"></div>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+      <div>
+        <strong style="color:var(--gold)">⚠ Educational Purpose Only</strong>
+        <div class="small muted" style="margin-top:6px;max-width:80ch">
+          This system is for educational and demonstration purposes. Not financial advice.
+          Always conduct your own research and consult licensed professionals before trading.
+        </div>
+      </div>
+      <div class="small muted">© 2025 Stock Prediction System</div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const REFRESH_INTERVAL = {{ refresh_interval }} * 1000;
+
+    // Toast notification
+    function showToast(msg, time=3500) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), time);
+    }
+
+    // Animate numeric values
+    function animateValue(id, start, end, duration=800) {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const range = end - start;
+      let startTime = null;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const value = start + Math.round(range * progress);
+        el.textContent = value.toLocaleString();
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    // Update summary values
+    function setSummary(data) {
+      animateValue('totalPositions', 0, data.total_positions || 0);
+
+      document.getElementById('capitalAllocated').textContent =
+        '$' + Math.round(data.total_allocated || 0).toLocaleString();
+      document.getElementById('capPct').textContent =
+        (data.total_allocated_pct || 0).toFixed(1) + '% of portfolio';
+
+      document.getElementById('cashReserve').textContent =
+        '$' + Math.round(data.cash_remaining || 0).toLocaleString();
+      document.getElementById('cashPct').textContent =
+        (data.cash_remaining_pct || 0).toFixed(1) + '% available';
+
+      document.getElementById('totalRisk').textContent =
+        (data.total_risk_pct || 0).toFixed(2) + '%';
+      document.getElementById('riskVal').textContent =
+        '$' + Math.round(data.total_risk || 0).toLocaleString() + ' at risk';
+
+      document.getElementById('avgConfidence').textContent =
+        Math.round((data.avg_confidence || 0) * 100) + '%';
+      document.getElementById('avgAccuracy').textContent =
+        (data.avg_prophet_accuracy || 0).toFixed(1) + '%';
+    }
+
+    // Initialize with server data
+    const initialSummary = {{ summary|tojson }};
+    setSummary(initialSummary);
+
+    // Plotly charts
+    const accuracyData = {{ accuracy_data|tojson }};
+    const allocationData = {{ allocation_data|tojson }};
+
+    function renderAccuracyChart(data) {
+      const trace = {
+        x: data.symbols || [],
+        y: data.accuracies || [],
+        type: 'bar',
+        marker: {
+          color: (data.accuracies || []).map(v =>
+            v >= 60 ? '#10b981' : v >= 45 ? '#d4af37' : '#ef4444'
+          ),
+        },
+        hovertemplate: '%{x}: %{y:.1f}%<extra></extra>'
+      };
+
+      const layout = {
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: 'transparent',
+        font: { color: '#ffffff', family: 'inherit' },
+        margin: { l: 50, r: 20, t: 20, b: 80 },
+        yaxis: {
+          title: 'Accuracy (%)',
+          range: [0, 100],
+          gridcolor: 'rgba(212, 175, 55, 0.1)'
+        },
+        xaxis: {
+          tickangle: -45,
+          gridcolor: 'rgba(212, 175, 55, 0.1)'
+        },
+        height: 360,
+      };
+
+      Plotly.newPlot('accuracyChart', [trace], layout, {
+        responsive: true,
+        displayModeBar: false
+      });
+    }
+
+    function renderAllocationChart(data) {
+      const trace = {
+        labels: data.symbols || [],
+        values: data.allocations || [],
+        type: 'pie',
+        textinfo: 'label+percent',
+        hoverinfo: 'label+value+percent',
+        marker: {
+          colors: ['#d4af37', '#b8941f', '#f4d03f', '#c9a842', '#a68a2e']
+        }
+      };
+
+      const layout = {
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: 'transparent',
+        font: { color: '#ffffff', family: 'inherit' },
+        height: 360,
+        margin: { t: 30, b: 30, l: 30, r: 30 },
+        showlegend: true,
+        legend: { orientation: 'v' }
+      };
+
+      Plotly.newPlot('allocationChart', [trace], layout, {
+        responsive: true,
+        displayModeBar: false
+      });
+    }
+
+    renderAccuracyChart(accuracyData);
+    renderAllocationChart(allocationData);
+
+    // Refresh dashboard data
+    async function refreshDashboard(showNotification = true) {
+      try {
+        const res = await fetch('/api/dashboard');
+        if (!res.ok) throw new Error('Failed to fetch');
+
+        const data = await res.json();
+
+        // Update summary
+        setSummary(data.summary);
+
+        // Update timestamp
+        const now = new Date().toLocaleString();
+        document.getElementById('updateTime').textContent = now;
+
+        // Update table if recommendations changed
+        if (data.recommendations && data.recommendations.length > 0) {
+          updateTable(data.recommendations);
+        }
+
+        // Update charts
+        if (data.accuracy_data) renderAccuracyChart(data.accuracy_data);
+        if (data.allocation_data) renderAllocationChart(data.allocation_data);
+
+        if (showNotification) showToast('✅ Dashboard refreshed');
+
+      } catch (err) {
+        console.error('Refresh error:', err);
+        if (showNotification) showToast('⚠ Failed to refresh', 4000);
+      }
+    }
+
+    function updateTable(recommendations) {
+      const tbody = document.getElementById('recBody');
+      if (!tbody) return;
+
+      tbody.innerHTML = '';
+      recommendations.forEach(rec => {
+        const tr = document.createElement('tr');
+        const confLabel = rec.confidence_label || '';
+        const confClass = confLabel.includes('High') ? 'confidence-high' :
+                         confLabel.includes('Medium') ? 'confidence-med' : 'confidence-low';
+
+        tr.innerHTML = `
+          <td>
+            <strong>${rec.symbol}</strong>
+            ${rec.sector ? '<div class="small muted">' + rec.sector + '</div>' : ''}
+          </td>
+          <td><span class="badge ${rec.action === 'BUY' ? 'buy' : 'sell'}">${rec.action}</span></td>
+          <td>${rec.shares}</td>
+          <td class="mono">$${(+rec.current_price).toFixed(2)}</td>
+          <td>$${(+rec.target_price).toFixed(2)}</td>
+          <td>$${(+rec.stop_loss).toFixed(2)}</td>
+          <td>$${Math.round(rec.position_value || 0)}</td>
+          <td>${(+rec.risk_pct).toFixed(2)}%</td>
+          <td><span class="${confClass}">${confLabel}</span></td>
+          <td>${(+rec.prophet_accuracy).toFixed(1)}%</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Manual refresh button
+    document.getElementById('refreshBtn').addEventListener('click', () => {
+      refreshDashboard(true);
+    });
+
+    // Auto-refresh
+    setInterval(() => refreshDashboard(false), REFRESH_INTERVAL);
+
+    // Email subscription
+    document.getElementById('subscribeBtn').addEventListener('click', async () => {
+      const emailInput = document.getElementById('subscribeEmail');
+      const email = emailInput.value.trim();
+
+      if (!email || !email.includes('@')) {
+        showToast('⚠ Please enter a valid email');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          showToast('✅ ' + (data.message || 'Subscribed successfully!'));
+          emailInput.value = '';
+        } else {
+          showToast('⚠ ' + (data.error || 'Subscription failed'));
+        }
+      } catch (err) {
+        console.error('Subscribe error:', err);
+        showToast('⚠ Failed to subscribe. Try again later.');
+      }
+    });
+
+    // Enter key on email input
+    document.getElementById('subscribeEmail').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        document.getElementById('subscribeBtn').click();
+      }
+    });
+  </script>
+</body>
+</html>

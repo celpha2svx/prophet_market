@@ -1,0 +1,167 @@
+<!-- templates/signin.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sign In - Stock Prediction</title>
+  <style>
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-card: #121212;
+      --gold: #d4af37;
+      --gold-dark: #b8941f;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0a0;
+      --border: rgba(212, 175, 55, 0.1);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+      --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: var(--text-primary);
+      padding: 20px;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 40px;
+      border-radius: 16px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 20px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--bg-dark);
+      box-shadow: var(--shadow-gold);
+    }
+
+    h2 {
+      text-align: center;
+      margin: 0 0 8px 0;
+      background: linear-gradient(135deg, #f4d03f, var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-size: 14px;
+      margin-bottom: 16px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--bg-dark);
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-gold);
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #f4d03f, var(--gold));
+      transform: translateY(-2px);
+    }
+
+    .links {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #f4d03f;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">SP</div>
+    <h2>Sign In</h2>
+    <p class="subtitle">Frontend placeholder - Connect to your auth system</p>
+
+    <form onsubmit="event.preventDefault(); alert('Connect this to /api/auth/login')">
+      <input type="email" placeholder="Email address" required autofocus>
+      <input type="password" placeholder="Password" required>
+      <button class="btn" type="submit">Sign In</button>
+    </form>
+
+    <div class="links">
+      <a href="/">← Back to dashboard</a>
+      <a href="/signup">Create account</a>
+    </div>
+  </div>
+</body>
+</html>
