@@ -1,4 +1,4 @@
-# 📊 STOCKS_FOREX_AI_MODEL
+# 📊 PROPHET_MARKET
 
 *Empowering Smarter Investments with AI Precision*
 
@@ -27,9 +27,9 @@
 
 ## 🧠 Overview
 
-stocks_forex_ai_model is a comprehensive developer toolkit that automates the entire stock and forex analysis pipeline, integrating data ingestion, cleaning, forecasting, sentiment analysis, and reporting into a seamless workflow. Designed for scalability and flexibility, it empowers developers to build sophisticated financial prediction and decision-making systems.alysis pipeline. It includes:
+PROPHET MARKET is a comprehensive developer toolkit that automates the entire stock and forex analysis pipeline, integrating data ingestion, cleaning, forecasting, sentiment analysis, and reporting into a seamless workflow. Designed for scalability and flexibility, it empowers developers to build sophisticated financial prediction and decision-making systems.alysis pipeline. It includes:
 
-## why stock_forex_ai?
+## why PROPHET MARKET?
 
 
 This project streamlines complex financial workflows, enabling rapid development and deployment of predictive models. The core features include:
@@ -64,14 +64,14 @@ This project requires the following dependencies:
 
 ### 🛠 Installation
 
-Build stocks_forex_ai_model from the source and install dependencies:
+Build PROPHET_MARKET from the source and install dependencies:
 
     
     # Clone the repository
-    git clone https://github.com/celpha2svx/stocks_forex_ai_model
+    git clone https://github.com/celpha2svx/prophet_market
     
     # Navigate to the project directory
-    cd stocks_forex_ai_model
+    cd prophet_market
     
     # Install the dependencies
     pip install -r requirements.txt
@@ -91,9 +91,9 @@ Run the project with:
 
 stocksforexaimodel uses the {testframework} test framework. Run the test suite with:
 
-`bash
-pytest
-`
+
+    pytest
+
 
 ---
 
@@ -108,6 +108,6 @@ This project is licensed under the MIT License
 Developed by Ademuyiwa ✨  
 Data Scientist 
 For contributions, issues, or feature requests, please open a GitHub issue or pull request.
-`
+
 
 ---
