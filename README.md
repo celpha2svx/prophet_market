@@ -89,7 +89,7 @@ Run the project with:
 
 🧪 Testing
 
-stocksforexaimodel uses the {testframework} test framework. Run the test suite with:
+prophet_market uses the {testframework} test framework. Run the test suite with:
 
 
     pytest
